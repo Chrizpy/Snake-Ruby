@@ -33,23 +33,34 @@ if __FILE__ == $PROGRAM_NAME
     ### Game Loop ###
     tick = 0
     food = 0
+    speed = 20
     clear
     grid.draw 
     res = ['null']
     
     update do
         controller.check_input
-        if tick % 40 == 0
+        if tick % speed == 0
             snake.move(controller.direction)
-            if collision.check_collision(snake.body, munchies.available_munchies)
-                res = Marshal.load(Marshal.dump(collision.check_collision(snake.body, munchies.available_munchies)))
-            end
+            puts speed
+           # puts munchies.available_munchies
+            #if collision.check_collision(snake.body, munchies.available_munchies)
+            res = Marshal.load(Marshal.dump(collision.check_collision(snake.body, munchies.available_munchies)))
+            #end
+            #puts res[0]
             if res[0] == 'game over'
                 break
             elsif res[0] == 'grow'
                 puts "GROWING"
                 snake.grow(res[1])
                 munchies.get_munchied(res[1])
+                if speed != 1
+                    if speed < 6
+                        speed -= 1
+                    else
+                        speed -=5
+                    end
+                end
             end
             munchies.draw
             snake.draw
@@ -58,9 +69,11 @@ if __FILE__ == $PROGRAM_NAME
         end
         tick += 1
 
-        if food == 30
+        if food == 15
             food = 0
-            munchies.new_random
+            if munchies.available_munchies.length < 3
+                munchies.new_random
+            end
         end
       end
 

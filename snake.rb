@@ -85,6 +85,7 @@ class Snake
                 size: @@grid - 1
             )
         end
+        @@stop_delete = false
     end
     def grow(new_piece)
         @@will_grow = true

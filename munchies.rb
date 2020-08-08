@@ -10,6 +10,7 @@ class Munchies
     end
     def draw
         @available_munchies.each do |part|
+            #puts "#{part[0]}, #{part[1]}"
             Square.new(
                 x: part[0] * @@size, 
                 y: part[1] * @@size, 
@@ -17,15 +18,6 @@ class Munchies
                 size: @@size - 1
                 )
         end
-        if @@new_munch[0]
-            Square.new(
-                x: @@new_munch[1][0] * @@size, 
-                y: @@new_munch[1][1] * @@size, 
-                color: 'green',
-                size: @@size - 1
-                )
-        end
-
     end
     def random_coord_x
         rand @@width
@@ -34,27 +26,19 @@ class Munchies
         rand @@height
     end
     def new_random
-        @available_munchies.each do |part|
-            Square.new(
-                x: part[0] * @@size, 
-                y: part[1] * @@size, 
-                color: 'green',
-                size: @@size - 1
-                )
-        end
-        @available_munchies.each do |part|
-            part[0] = self.random_coord_x
-            part[1] = self.random_coord_y
-        end
+        @available_munchies.push([self.random_coord_x, self.random_coord_y])
     end
     def get_munchied(apple)
-        @available_munchies.each do |part, index|
-            if part[0] == apple[0] && apple[1] == part[1]
-                @@available_munchies.delete_at(index)
-                @@new_munch[0] = true
-                @@new_munch[1][0] = part[0]
-                @@new_munch[1][1] = part[1] 
+        index = 0
+        @available_munchies.each do |part|
+            puts "#{apple[0]}, #{apple[1]}"
+            puts "apples"
+            puts "#{part[0]}, #{part[1]}"
+            if (part[0] == apple[0]) and (apple[1] == part[1])
+                puts "Deletes at  #{index}"
+                @available_munchies.delete_at(index)
             end
+            index += 1
         end
 
     end
