@@ -10,7 +10,6 @@ class Munchies
     end
     def draw
         @available_munchies.each do |part|
-            #puts "#{part[0]}, #{part[1]}"
             Square.new(
                 x: part[0] * @@size, 
                 y: part[1] * @@size, 
@@ -31,15 +30,10 @@ class Munchies
     def get_munchied(apple)
         index = 0
         @available_munchies.each do |part|
-            puts "#{apple[0]}, #{apple[1]}"
-            puts "apples"
-            puts "#{part[0]}, #{part[1]}"
             if (part[0] == apple[0]) and (apple[1] == part[1])
-                puts "Deletes at  #{index}"
                 @available_munchies.delete_at(index)
             end
             index += 1
         end
-
     end
 end
