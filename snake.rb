@@ -1,5 +1,5 @@
 class Snake
-    attr_accessor :body
+    attr_accessor :body, :score
 
     def initialize(gridsize, width, height)
         @@grid = gridsize
@@ -8,6 +8,7 @@ class Snake
         @@will_grow = false
         @@new_part = [] 
         @@stop_delete = false
+        @score = 0
     end
     def move(direction)
         @@save = Marshal.load(Marshal.dump(@body))
@@ -81,7 +82,7 @@ class Snake
             Square.new(
                 x: @@to_delete[0] * @@grid,
                 y: @@to_delete[1] * @@grid,
-                color: 'green',
+                color: 'blue',
                 size: @@grid - 1
             )
         end
@@ -90,6 +91,7 @@ class Snake
     def grow(new_piece)
         @@will_grow = true
         @@new_part = new_piece
+        @score += 150
     end
     
 end

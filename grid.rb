@@ -2,7 +2,7 @@ class Grid
     attr_reader :background, :size, :width, :height
 
     def initialize(width, height)
-        @background = 'green'
+        @background = 'blue'
         @size = 20
         @width = width / @size
         @height = height / @size
@@ -19,7 +19,7 @@ class Grid
             Square.new(
                 x: part[0] * @size,
                 y: part[1] * @size,
-                color: 'green',
+                color: @background,
                 size: @size - 1
                 )
         end

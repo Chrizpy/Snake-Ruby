@@ -1,9 +1,10 @@
 class Controller
-    attr_accessor :direction
+    attr_accessor :direction, :play
 
     def initialize
         @direction = 'left'
         @@last = @direction
+        @play = false
     end
     def check_input
         Window.on :key_down do |event|
@@ -24,6 +25,8 @@ class Controller
                 if @@last != 'up'
                     @direction = 'down'
                 end
+            when 'p'
+                @play = true
             end
         end
     end
