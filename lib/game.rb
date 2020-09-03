@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require 'ruby2d'
-require './grid'
-require './snake'
-require './controller'
-require './munchies'
-require './collide'
+require_relative 'grid'
+require_relative 'snake'
+require_relative 'controller'
+require_relative 'munchies'
+require_relative 'collide'
 
 # Ruby2d's standard window size is 640x480.
 # 640 / 20 = 32px on the x-axis.

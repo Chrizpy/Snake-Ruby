@@ -1,0 +1,5 @@
+#!/bin/sh
+
+bundle init
+bundle install
+bundle exec ruby ./lib/game.rb
