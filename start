@@ -1,5 +1,5 @@
-#!/bin/sh
+#!/bin/bash
 
-bundle init
+echo "Starting Classic Snake"
 bundle install
-bundle exec ruby ./lib/game.rb
+bundle exec ruby ./game.rb
