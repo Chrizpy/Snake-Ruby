@@ -3,7 +3,7 @@
 # Controller class
 # This class is responsible for the maneuvering through out the game.
 class Controller
-  attr_accessor :direction, :play, :last
+  attr_accessor :direction, :play
 
   def initialize
     @direction = 'left'
@@ -15,18 +15,18 @@ class Controller
     Window.on :key_down do |event|
       case event.key
       when 'left'
-        if last != 'right' then self.direction = 'left' end
+        if @last != 'right' then @direction = 'left' end
       when 'right'
-        if last != 'left' then self.direction = 'right' end
+        if @last != 'left' then @direction = 'right' end
       when 'up'
-        if last != 'down' then self.direction = 'up' end
+        if @last != 'down' then @direction = 'up' end
       when 'down'
-        if last != 'up' then self.direction = 'down' end
-      when 'p' then self.play = true end
+        if @last != 'up' then @direction = 'down' end
+      when 'p' then @play = true end
     end
   end
 
   def last_input
-    self.last = direction
+    @last = @direction
   end
 end

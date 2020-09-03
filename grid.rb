@@ -4,7 +4,7 @@
 # This class is responsible for creating the grid in which the playground
 # is used for playing the game.
 class Grid
-  attr_reader :background, :size, :width, :height, :grid
+  attr_reader :size, :width, :height
 
   def initialize(width, height)
     @background = 'blue'
@@ -13,20 +13,20 @@ class Grid
     @height = height / @size
     @grid = []
 
-    for y in 0..self.height
-      for x in 0..self.width
-        grid.push([x, y])
+    for y in 0..@height
+      for x in 0..@width
+        @grid.push([x, y])
       end
     end
   end
 
   def draw
-    grid.each do |part|
+    @grid.each do |part|
       Square.new(
-        x: part[0] * size,
-        y: part[1] * size,
-        color: background,
-        size: size - 1
+        x: part[0] * @size,
+        y: part[1] * @size,
+        color: @background,
+        size: @size - 1
       )
     end
   end

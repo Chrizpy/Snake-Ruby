@@ -4,8 +4,6 @@
 # This class is used to check the collision between snake and apples
 # and snake itself
 class Collide
-  attr_accessor :retn
-
   def initialize
     @retn = [false, false]
   end
@@ -19,7 +17,7 @@ class Collide
 
   def check_food(snake, apples)
     apples.each do |apple|
-      if (snake.first[0] == apple[0]) && (snake.first[1] == apple[1]) then self.retn = ['grow', apple] end
+      if (snake.first[0] == apple[0]) && (snake.first[1] == apple[1]) then @retn = ['grow', apple] end
     end
   end
 
@@ -37,6 +35,6 @@ class Collide
   end
 
   def reset_retn
-    self.retn = [false, false]
+    @retn = [false, false]
   end
 end
