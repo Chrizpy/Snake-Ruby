@@ -45,7 +45,6 @@ class Snake
       if body.last[0] == @new_part[0] && body.last[1] == @new_part[1]
         @body.push(@to_delete)
         @will_grow = false
-        @stop_delete = true
       end
     end
   end
@@ -59,15 +58,6 @@ class Snake
         size: @grid - 1
       )
     end
-    unless @stop_delete
-      Square.new(
-        x: @to_delete[0] * @grid,
-        y: @to_delete[1] * @grid,
-        color: 'blue',
-        size: @grid - 1
-      )
-    end
-    @stop_delete = false
   end
 
   def grow(new_piece)

@@ -18,7 +18,7 @@ def snake_game()
   # Init values #
   tick = 0
   food = 0
-  speed = 40
+  speed = 60
   res = ['null']
   game_state = 'menu'
 
@@ -39,8 +39,16 @@ def snake_game()
       when 'grow'
         snake.grow(res[1])
         munchies.get_munchied(res[1])
-        unless speed == 1 then if speed < 7 then speed -= 1 else speed -=2 end end
+        if speed < 30
+          unless speed == 2
+            speed -=2 
+          end
+        else 
+          speed -=10
+        end 
       end
+      clear
+      grid.draw
       munchies.draw
       snake.draw
       controller.last_input
@@ -91,11 +99,6 @@ def snake_game()
       grid.draw
     end
   }
-
-  ##############
-  clear
-  grid.draw
-  ##############
 
   update do
     case game_state
