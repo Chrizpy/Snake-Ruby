@@ -34,7 +34,7 @@ Using the class function **create** initializes the game.
 
     snake.create
 
-Finally the game can be started by calling the class function **start**
+Finally the game can be started by calling the class function **start**.
 
     snake.start
 
