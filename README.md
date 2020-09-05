@@ -23,7 +23,7 @@ If you wanna hop right into the game and skip all the boring parts, use the **st
 #### Example usage the Game class:
 To be able to create Game objects, require game.rb in the lib folder.
 
-    require 'lib/game
+    require 'lib/game'
 To create objects of the game you want, put in the game you want as the parameter to the Game object.
 
     snake = Game.new('snake')
