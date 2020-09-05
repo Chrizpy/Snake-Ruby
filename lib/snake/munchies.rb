@@ -9,8 +9,9 @@ class Munchies
     @width = width
     @height = height
     @size = size
-    @available_munchies = [[random_coord_x, random_coord_y], [random_coord_x, random_coord_y]]
     @new_munch = [false, [0, 0]]
+    @food_tick = 0
+    @available_munchies = [[random_coord_x, random_coord_y], [random_coord_x, random_coord_y]]
   end
 
   def draw
@@ -39,8 +40,16 @@ class Munchies
   def get_munchied(apple)
     index = 0
     @available_munchies.each do |part|
-      if (part[0] == apple[0]) && (apple[1] == part[1]) then @available_munchies.delete_at(index) end
+      @available_munchies.delete_at(index) if (part[0] == apple[0]) && (apple[1] == part[1])
       index += 1
     end
+  end
+
+  def food_update
+    if @food_tick == 15
+      new_random if @available_munchies.length < 4
+      @food_tick = 0
+    end
+    @food_tick += 1
   end
 end

@@ -13,11 +13,13 @@ class Grid
     @height = height / @size
     @grid = []
 
+    # rubocop:disable Style/For
     for y in 0..@height
       for x in 0..@width
         @grid.push([x, y])
       end
     end
+    # rubocop:enable Style/For
   end
 
   def draw

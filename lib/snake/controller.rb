@@ -11,20 +11,26 @@ class Controller
     @play = false
   end
 
+  # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity
   def check_input
     Window.on :key_down do |event|
       case event.key
       when 'left'
-        if @last != 'right' then @direction = 'left' end
+        @direction = 'left'  if @last != 'right'
       when 'right'
-        if @last != 'left' then @direction = 'right' end
+        @direction = 'right' if @last != 'left'
       when 'up'
-        if @last != 'down' then @direction = 'up' end
+        @direction = 'up'    if @last != 'down'
       when 'down'
-        if @last != 'up' then @direction = 'down' end
-      when 'p' then @play = true end
+        @direction = 'down'  if @last != 'up'
+      when 'escape'
+        exit
+      when 'p'
+        @play = true
+      end
     end
   end
+  # rubocop:enable Metrics/MethodLength, Metrics/CyclomaticComplexity
 
   def last_input
     @last = @direction

@@ -2,4 +2,4 @@
 
 echo "Starting Classic Snake"
 bundle install
-bundle exec ruby ./game.rb
+bundle exec ruby ./start_snake.rb

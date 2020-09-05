@@ -4,7 +4,7 @@
 # This class is responsible for spawning snake and
 # general things about snake
 class Snake
-  attr_accessor :body, :score
+  attr_accessor :body, :score, :speed
 
   def initialize(gridsize, width, height)
     @grid = gridsize
@@ -16,37 +16,40 @@ class Snake
     @score = 0
     @save = [[]]
     @to_delete = 0
+    @speed = 45
   end
 
+  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
   def move(direction)
     @save = Marshal.load(Marshal.dump(body))
 
     case direction
     when 'left'
       body.first[0] -= 1
-      if body.first[0].negative? then body.first[0] = @grid_dim[0] end
+      body.first[0] = @grid_dim[0] if body.first[0].negative?
       indexing_parts
     when 'right'
       body.first[0] += 1
-      if body.first[0] > @grid_dim[0] then body.first[0] = 0 end
+      body.first[0] = 0 if body.first[0] > @grid_dim[0]
       indexing_parts
     when 'up'
       body.first[1] -= 1
-      if body.first[1].negative? then body.first[1] = @grid_dim[1] end
+      body.first[1] = @grid_dim[1] if body.first[1].negative?
       indexing_parts
     when 'down'
       body.first[1] += 1
-      if body.first[1] > @grid_dim[1] then body.first[1] = 0 end
+      body.first[1] = 0 if body.first[1] > @grid_dim[1]
       indexing_parts
     end
+    # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
     @to_delete = @save.last
 
-    if @will_grow
-      if body.last[0] == @new_part[0] && body.last[1] == @new_part[1]
-        @body.push(@to_delete)
-        @will_grow = false
-      end
+    # rubocop:disable Style/GuardClause
+    if @will_grow && (body.last[0] == @new_part[0] && body.last[1] == @new_part[1])
+      @body.push(@to_delete)
+      @will_grow = false
     end
+    # rubocop:enable Style/GuardClause
   end
 
   def draw
@@ -73,5 +76,19 @@ class Snake
         @body[index + 1][0] = part[0]
       end
     end
+  end
+
+  def speed_update
+    # rubocop:disable Style/GuardClause)
+    if @speed > 5
+      @speed -= if @speed > 30
+                  5
+                else
+                  2
+                end
+    end
+    # rubocop:enable Style/GuardClause)
+    # For debugging purposes
+    # puts "Current speed is #{@speed}"
   end
 end

@@ -17,18 +17,16 @@ class Collide
 
   def check_food(snake, apples)
     apples.each do |apple|
-      if (snake.first[0] == apple[0]) && (snake.first[1] == apple[1]) then @retn = ['grow', apple] end
+      @retn = ['grow', apple] if (snake.first[0] == apple[0]) && (snake.first[1] == apple[1])
     end
   end
 
   def check_snake(snake)
     index = 0
     snake.each do |part|
-      if index.positive?
-        if (snake.first[0] == part[0]) && (snake.first[1] == part[1])
-          @retn = ['game over', part]
-          break
-        end
+      if index.positive? && (snake.first[0] == part[0]) && (snake.first[1] == part[1])
+        @retn = ['game over', part]
+        break
       end
       index += 1
     end
