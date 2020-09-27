@@ -11,26 +11,52 @@ class Controller
     @play = false
   end
 
-  # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity
   def check_input
     Window.on :key_down do |event|
-      case event.key
-      when 'left'
-        @direction = 'left'  if @last != 'right'
-      when 'right'
-        @direction = 'right' if @last != 'left'
-      when 'up'
-        @direction = 'up'    if @last != 'down'
-      when 'down'
-        @direction = 'down'  if @last != 'up'
-      when 'escape'
-        exit
-      when 'p'
-        @play = true
-      end
+      switcher event.key
     end
   end
-  # rubocop:enable Metrics/MethodLength, Metrics/CyclomaticComplexity
+
+  def switcher(key)
+    case key
+    when 'left'
+      turn_left
+    when 'right'
+      turn_right
+    when 'up'
+      turn_up
+    when 'down'
+      turn_down
+    when 'escape'
+      escape_game
+    when 'p'
+      start_game
+    end
+  end
+
+  def turn_left
+    @direction = 'left' if @last != 'right'
+  end
+
+  def turn_right
+    @direction = 'right' if @last != 'left'
+  end
+
+  def turn_up
+    @direction = 'up' if @last != 'down'
+  end
+
+  def turn_down
+    @direction = 'down' if @last != 'up'
+  end
+
+  def escape_game
+    exit
+  end
+
+  def start_game
+    @play = true
+  end
 
   def last_input
     @last = @direction
