@@ -11,7 +11,7 @@ require_relative 'ui/ui_handler'
 # Game class, creates a game object from the game input parameter.
 class Game
   def initialize(game)
-    @game       = game
+    @game = game
     @game_score = 0
     @window = Window.new
     @ui_handler = UIHandler.new(@game, @window)
